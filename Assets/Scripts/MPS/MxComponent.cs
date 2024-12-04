@@ -165,19 +165,24 @@ public class MxComponent : MonoBehaviour
             foreach (int d in data)
             {
                 string input = Convert.ToString(d, 2);
-                string reversed = Reverse(input);
 
-                // x[33] = 0 -> x[3][3]
-                if (16 - reversed.Length > 0) // 1101010001 -> 110101000100000 
+                if (!deviceName.Contains("D")) // deviceName = "Y0", "X0"
                 {
-                    int countZero = 16 - reversed.Length;
-                    for (int i = 0; i < countZero; i++)
+                    input = Reverse(input);
+
+
+                    // x[33] = 0 -> x[3][3]
+                    if (16 - input.Length > 0) // 1101010001 -> 110101000100000 
                     {
-                        reversed += '0';
+                        int countZero = 16 - input.Length;
+                        for (int i = 0; i < countZero; i++)
+                        {
+                            input += '0';
+                        }
                     }
                 }
 
-                totalData += reversed;
+                totalData += input;
             }
 
             return totalData; // 00011001100
